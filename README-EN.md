@@ -37,7 +37,8 @@ This script automates the process of scanning a network to identify connected de
 - **Permissions and Access**: Ensure that only authorized personnel can run the script and access the stored results.
 
 ### Result
-![image](https://github.com/danielcba/nmap-to-database/assets/157246808/bd9d888d-35d8-4111-97c5-3aed501ae9ff)
+![Screenshot from 2024-10-22 16-54-04](https://github.com/user-attachments/assets/b06c9c87-11ab-4212-a2fc-269fc997dbff)
+
 
 ---
 
