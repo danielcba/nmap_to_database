@@ -40,6 +40,11 @@ This script automates the process of scanning a network to identify connected de
 ![Screenshot from 2024-10-22 16-54-04](https://github.com/user-attachments/assets/b06c9c87-11ab-4212-a2fc-269fc997dbff)
 
 
+### License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+
 ---
 
 This script is a powerful and versatile tool for network management and security, providing critical information in an automated and efficient manner.
