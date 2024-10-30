@@ -166,6 +166,8 @@ Asegúrate de que el script `nmap-to-database.py` tenga permisos de ejecución y
 
 ![Screenshot from 2024-10-22 16-54-04](https://github.com/user-attachments/assets/8253cadf-06ec-4870-b242-757756607af1)
 
+## Licencia
 
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
 ---
 Este script es una herramienta potente y versátil para la gestión y seguridad de la red, proporcionando información crítica de forma automatizada y eficiente.
