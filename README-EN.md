@@ -27,7 +27,7 @@ This script automates the process of scanning a network to identify connected de
 
 ### Typical Use
 
-1. **Network Administrators**: You can use the script to get an overview of the network infrastructure, identify devices and services, and maintain an up-to-date inventory.
+1. **Network Administrators**: You can use the script to get an overview of the network infrastructure, identify devices and services, and maintain an up_to_date inventory.
 2. **Security Professionals**: They can use the data to perform security assessments, identify possible vulnerabilities and plan corrective actions.
 3. **Auditors**: They can use the script as part of network audits to verify compliance with security policies and regulations.
 
