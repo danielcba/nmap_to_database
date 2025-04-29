@@ -1,3 +1,6 @@
+---
+
+# README
 ## Propósito del Script
 
 Este script automatiza el proceso de escaneo de una red para identificar dispositivos conectados y los servicios que están ejecutando, y luego almacena estos resultados en una base de datos para su análisis y consulta posterior. Es útil para administradores de red y profesionales de seguridad informática que necesitan monitorizar y gestionar la infraestructura de red de manera eficiente.
