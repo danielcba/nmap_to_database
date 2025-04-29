@@ -1,50 +1,165 @@
+---
+
+# README
+
 ## Purpose of the Script
 
-This script automates the process of scanning a network to identify connected devices and the services they are running, and then stores these results in a database for later analysis and query. It is useful for network administrators and computer security professionals who need to monitor and manage network infrastructure efficiently.
+This script automates the process of scanning a network to identify connected devices and the services they are running, then stores the results in a database for subsequent analysis and querying. It is designed for network administrators and cybersecurity professionals who need to efficiently monitor and manage network infrastructure.
 
-### Key Script Functions
+### Key Features of the Script
 
-1. **Network Scan**:
+1. **Network Scanning**:
+   - Uses `nmap`, a powerful network scanning tool, to discover all devices on a specified network and detect running services and software versions.
+   - Scans a range of IP addresses and employs advanced techniques to identify active services and software versions with high precision.
 
-- Use `nmap`, a powerful network scanning tool, to search all devices on a specific network and detect the services and software versions they are running.
-- Scanning covers a range of IP addresses and uses advanced techniques to identify active services and software versions with high accuracy.
-
-2. **Generation of Results**:
-
-- Scan results are saved in a file in CSV (comma separated values) format, which makes it easy to organize and analyze the collected data.
+2. **Result Generation**:
+   - Saves scan results in a CSV (comma-separated values) file for organized data storage and analysis.
 
 3. **Database Storage**:
+   - Connects to a MariaDB database and loads scan results into a dedicated table.
+   - Storing results in a database enables efficient querying and integration with other analysis and reporting tools.
 
-- Connects to a MariaDB database and loads the scan results into a specific table.
-- Storing the results in a database allows for quick and efficient queries, and facilitates integration with other analysis and reporting tools.
+### Benefits of the Script
 
-### Script Benefits
+- **Automation**: Automates the entire process from scanning to data storage, saving time and reducing human error.
+- **Continuous Monitoring**: Can be scheduled to run periodically, providing up-to-date visibility of the network and detecting unauthorized changes or potential issues.
+- **Security Analysis**: Helps identify vulnerable services and software versions, facilitating patch management and security updates.
+- **Network Inventory**: Provides a detailed inventory of all devices and services on the network, aiding in asset management and capacity planning.
 
-- **Automation**: The script automates the entire process, from scanning to data storage, saving time and reducing human errors.
-- **Continuous Monitoring**: Can be run periodically to maintain an updated view of the network, helping to detect unauthorized changes or potential problems.
-- **Security Analysis**: Helps identify services and software versions on the network that could be vulnerable, facilitating the management of security patches and updates.
-- **Network Inventory**: Provides a detailed inventory of all devices and services on the network, useful for asset management and capacity planning.
+### Typical Use Cases
 
-### Typical Use
-
-1. **Network Administrators**: You can use the script to get an overview of the network infrastructure, identify devices and services, and maintain an up_to_date inventory.
-2. **Security Professionals**: They can use the data to perform security assessments, identify possible vulnerabilities and plan corrective actions.
-3. **Auditors**: They can use the script as part of network audits to verify compliance with security policies and regulations.
+1. **Network Administrators**: Use the script to gain network infrastructure insights, identify devices/services, and maintain an updated inventory.
+2. **Security Professionals**: Leverage the data for security assessments, vulnerability identification, and remediation planning.
+3. **Auditors**: Utilize the script during network audits to verify compliance with security policies and regulations.
 
 ### Security Considerations
 
-- **Credential Management**: It is important not to store credentials directly in the code. It is recommended to use safe environment variables or configuration files.
-- **Permissions and Access**: Ensure that only authorized personnel can run the script and access the stored results.
-
-### Result
-![Screenshot from 2024-10-22 16-54-04](https://github.com/user-attachments/assets/b06c9c87-11ab-4212-a2fc-269fc997dbff)
-
-
-### License
-
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
-
+- **Credential Management**: Avoid hardcoding credentials. Use environment variables or secure configuration files.
+- **Permissions**: Ensure only authorized personnel can execute the script and access stored results.
 
 ---
 
-This script is a powerful and versatile tool for network management and security, providing critical information in an automated and efficient manner.
+This script is a powerful and versatile tool for network management and security, delivering critical insights in an automated and efficient manner.
+
+---
+
+### `requirements.txt` File
+
+This file specifies the dependencies required to run the Python script.
+
+```
+python-nmap
+mysql-connector-python
+```
+
+### SQL Commands for Database and Table Creation
+
+```sql
+CREATE SCHEMA `basenmap`;
+
+CREATE TABLE `basenmap`.`nmap` (
+  `host` VARCHAR(15) NULL,
+  `hostname` VARCHAR(64) NULL,
+  `hostname_type` VARCHAR(16) NULL,
+  `protocol` VARCHAR(8) NULL,
+  `port` VARCHAR(5) NULL,
+  `name` VARCHAR(20) NULL,
+  `state` VARCHAR(16) NULL,
+  `product` VARCHAR(32) NULL,
+  `extrainfo` VARCHAR(64) NULL,
+  `reason` VARCHAR(16) NULL,
+  `version` VARCHAR(32) NULL,
+  `conf` VARCHAR(3) NULL,
+  `cpe` VARCHAR(64) NULL
+);
+```
+
+---
+
+## Dependency Installation
+
+1. Create and activate a virtual environment (optional but recommended):
+
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+2. Install required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Database Configuration
+
+1. Connect to your MariaDB/MySQL server and execute the following SQL commands to create the database and table:
+
+   ```sql
+   CREATE SCHEMA `basenmap`;
+
+   CREATE TABLE `basenmap`.`nmap` (
+     `host` VARCHAR(15) NULL,
+     `hostname` VARCHAR(64) NULL,
+     `hostname_type` VARCHAR(16) NULL,
+     `protocol` VARCHAR(8) NULL,
+     `port` VARCHAR(5) NULL,
+     `name` VARCHAR(20) NULL,
+     `state` VARCHAR(16) NULL,
+     `product` VARCHAR(32) NULL,
+     `extrainfo` VARCHAR(64) NULL,
+     `reason` VARCHAR(16) NULL,
+     `version` VARCHAR(32) NULL,
+     `conf` VARCHAR(3) NULL,
+     `cpe` VARCHAR(64) NULL
+   );
+   ```
+
+---
+
+## Scheduling the Script Execution
+
+To automate periodic execution, configure the script as a cron job.
+
+### Crontab Configuration
+
+1. Open the crontab editor for the current user:
+
+   ```bash
+   crontab -e
+   ```
+
+2. Add the following line to schedule the script (adjust the path and frequency as needed):
+
+   ```bash
+   */2 * * * * /usr/bin/python3 /home/username/base-nmap/nmap_to_database.py
+   ```
+
+   Example frequencies:
+   - Every 5 minutes: `*/5 * * * *`
+   - Hourly: `0 * * * *`
+   - Daily at 3 AM: `0 3 * * *`
+
+3. Save and exit the editor (e.g., in `nano`: `CTRL+O` then `CTRL+X`).
+
+### Verification
+
+- List scheduled tasks to confirm:
+  ```bash
+  crontab -l
+  ```
+
+### Security Note
+
+Ensure the script has execute permissions and the cron user has adequate privileges to run the script and access the database.
+
+### Sample Output
+
+![Screenshot from 2024-10-22 16-54-04](https://github.com/user-attachments/assets/8253cadf-06ec-4870-b242-757756607af1)
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+This script is a robust tool for network management and security, delivering critical insights through automation.
